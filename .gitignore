@@ -29,3 +29,6 @@ _testmain.go
 
 # Compiled Binary
 chillserve
+
+# glide
+vendor/
