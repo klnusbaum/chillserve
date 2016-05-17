@@ -11,16 +11,16 @@ type ChillHandler struct {
 }
 
 func (ch ChillHandler) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
-	writeChillHeader(rw)
-	ch.writeChillJson(rw)
+	writeHeader(rw)
+	ch.writeBody(rw)
 }
 
-func writeChillHeader(rw http.ResponseWriter) {
+func writeHeader(rw http.ResponseWriter) {
 	rw.Header().Set("Content-Type", "text/json; charset=utf-8")
 	rw.WriteHeader(http.StatusOK)
 }
 
-func (ch ChillHandler) writeChillJson(rw http.ResponseWriter) {
+func (ch ChillHandler) writeBody(rw http.ResponseWriter) {
 	numOptions := len(ch.ChillPhrases)
 	selectionIndex := rand.Intn(numOptions)
 	response := map[string]string{"chill": ch.ChillPhrases[selectionIndex]}
