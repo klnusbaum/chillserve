@@ -26,3 +26,6 @@ _testmain.go
 # IntelliJ
 .idea
 *.iml
+
+# Compiled Binary
+chillserve
