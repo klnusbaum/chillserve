@@ -2,13 +2,12 @@ package main
 
 import (
 	"net/http"
+	"github.com/klnusbaum/chillserve/handlers"
 )
 
 func main() {
 
-	ch := ChillHandler{
-		ChillPhrases: []string{"chill", "super chill", "chilly freeze"},
-	}
+	ch := handlers.NewChillHandler("chill", "super chill", "chilly freeze")
 
 	http.Handle("/chill", ch)
 	http.ListenAndServe(":8080", nil)
