@@ -14,6 +14,12 @@ type chillHandler struct {
 	random randomer
 }
 
+// NewChillHandler creates an http handler that will give simple, chill responses. Responses are in the form
+// of a json map. There is one key, "chill", and it's value will be a chill phrase. The chill phrase will be choosen
+// at random from one of the phrases provided.
+//
+// Example response:
+//   { "chill" : "super chill" }
 func NewChillHandler(phrases ...string) http.Handler {
 	return chillHandler{
 		phrases:phrases,

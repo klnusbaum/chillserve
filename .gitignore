@@ -32,3 +32,6 @@ chillserve
 
 # glide
 vendor/
+
+#testing
+coverage.out
