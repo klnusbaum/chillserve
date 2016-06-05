@@ -6,10 +6,33 @@ import (
 	"strings"
 )
 
-type chillifier struct {}
+type chillReplacer interface {
+	Replace(s string) string
+}
+
+type chillifier struct {
+	replacer chillReplacer
+}
 
 func NewChillifierHandler() http.Handler {
-	return chillifier{}
+	return chillifier{
+		replacer: strings.NewReplacer(
+			" the ", " the chill ",
+			" The ", " The chill ",
+			"The ", "The chill ",
+			" a ", " a chill ",
+			" A ", " A chill ",
+			"A ", "A chill ",
+			" their ", " their chill ",
+			" Their ", " Their chill ",
+			" hate ", " love ",
+			" Hate ", " Love ",
+			"Hate ", "Love ",
+			" my ", " my chill ",
+			" My ", " My chill ",
+			"My ", "My chill",
+		),
+	}
 }
 
 func (ch chillifier) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
@@ -37,24 +60,7 @@ func (ch chillifier) writeErrorResponse(rw http.ResponseWriter) {
 func (ch chillifier) writeChillResponse(rw http.ResponseWriter, text string) {
 	rw.WriteHeader(http.StatusOK)
 
-	r := strings.NewReplacer(
-		" the ", " the chill ",
-		" The ", " The chill ",
-		"The ", "The chill ",
-		" a ", " a chill ",
-		" A ", " A chill ",
-		"A ", "A chill ",
-		" their ", " their chill ",
-		" Their ", " Their chill ",
-		" hate ", " love ",
-		" Hate ", " Love ",
-		"Hate ", "Love ",
-		" my ", " my chill ",
-		" My ", " My chill ",
-		"My ", "My chill",
-	)
-
-	response := map[string]string{"chill text": r.Replace(text)}
+	response := map[string]string{"chill text": ch.replacer.Replace(text)}
 	encoder := json.NewEncoder(rw)
 	encoder.Encode(response)
 }
