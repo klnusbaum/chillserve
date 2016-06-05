@@ -12,7 +12,24 @@ ever the occasion, some times you just need to chill. CaaS has you
 covered. Just simply hit the the `/chill` endpoint and you will get 
 back a JSON response with a chill phrase to help bring you serenity.
 
-Example Response
+Example Response:
 ```json
 { "chill": "super chill" }
+```
+
+## /chillify
+Some one just handed you a large document. Just a single glance, and you could
+already tell: this was seriously going to harsh your mellow. Who hasn't this 
+happened to. The `/chillify` endpoint is their to remedy this exact situation.
+Simply provide it with the unchill text, and `/chillify` will send you back
+a much more chill version of the text.
+
+Example Request:
+```json
+{ "text": "I hate living with my roommate" }
+```
+
+Example Resposne:
+```json
+{ "text": "I love living with my chill roommate" }
 ```
