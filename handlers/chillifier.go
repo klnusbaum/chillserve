@@ -45,7 +45,14 @@ func (ch chillifier) writeChillResponse(rw http.ResponseWriter, text string) {
 		" A ", " A chill ",
 		"A ", "A chill ",
 		" their ", " their chill ",
-		" Their ", " Their chill ")
+		" Their ", " Their chill ",
+		" hate ", " love ",
+		" Hate ", " Love ",
+		"Hate ", "Love ",
+		" my ", " my chill ",
+		" My ", " My chill ",
+		"My ", "My chill",
+	)
 
 	response := map[string]string{"chill text": r.Replace(text)}
 	encoder := json.NewEncoder(rw)
