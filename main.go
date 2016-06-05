@@ -22,9 +22,11 @@ func main() {
 		panic("Could not read config file")
 	}
 
-	ch := handlers.NewRandomChillHandler(config.Phrases...)
+	ch := handlers.NewChillifierHandler()
+	rch := handlers.NewRandomChillHandler(config.Phrases...)
 
-	http.Handle("/chill", ch)
+	http.Handle("/chillify", ch)
+	http.Handle("/chill", rch)
 	http.ListenAndServe(":8080", nil)
 }
 

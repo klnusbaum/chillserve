@@ -27,20 +27,16 @@ func NewRandomChillHandler(phrases ...string) http.Handler {
 	}
 }
 
-func (ch randomChillHandler) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
-	writeHeader(rw)
-	ch.writeBody(rw)
-}
-
-func writeHeader(rw http.ResponseWriter) {
+func (rch randomChillHandler) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	rw.Header().Set("Content-Type", "text/json; charset=utf-8")
 	rw.WriteHeader(http.StatusOK)
+	rch.writeBody(rw)
 }
 
-func (ch randomChillHandler) writeBody(rw http.ResponseWriter) {
-	numOptions := len(ch.phrases)
-	selectionIndex := ch.random(numOptions)
-	response := map[string]string{"chill": ch.phrases[selectionIndex]}
+func (rch randomChillHandler) writeBody(rw http.ResponseWriter) {
+	numOptions := len(rch.phrases)
+	selectionIndex := rch.random(numOptions)
+	response := map[string]string{"chill": rch.phrases[selectionIndex]}
 	encoder := json.NewEncoder(rw)
 	encoder.Encode(response)
 }
