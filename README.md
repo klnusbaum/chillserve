@@ -31,5 +31,5 @@ Example Request:
 
 Example Resposne:
 ```json
-{ "text": "I love talking with my chill kombucha supplier." }
+{ "chill text": "I love talking with my chill kombucha supplier." }
 ```
