@@ -26,10 +26,10 @@ a much more chill version of the text.
 
 Example Request:
 ```json
-{ "text": "I hate living with my roommate" }
+{ "text": "I hate talking with my kombucha supplier." }
 ```
 
 Example Resposne:
 ```json
-{ "text": "I love living with my chill roommate" }
+{ "text": "I love talking with my chill kombucha supplier." }
 ```
