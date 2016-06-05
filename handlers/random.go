@@ -9,7 +9,7 @@ import (
 // A function that generates a random number between 0 and a given number
 type randomer func(int) int
 
-type chillHandler struct {
+type randomChillHandler struct {
 	phrases []string
 	random randomer
 }
@@ -20,14 +20,14 @@ type chillHandler struct {
 //
 // Example response:
 //   { "chill" : "super chill" }
-func NewChillHandler(phrases ...string) http.Handler {
-	return chillHandler{
+func NewRandomChillHandler(phrases ...string) http.Handler {
+	return randomChillHandler{
 		phrases:phrases,
 		random:rand.Intn,
 	}
 }
 
-func (ch chillHandler) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
+func (ch randomChillHandler) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	writeHeader(rw)
 	ch.writeBody(rw)
 }
@@ -37,7 +37,7 @@ func writeHeader(rw http.ResponseWriter) {
 	rw.WriteHeader(http.StatusOK)
 }
 
-func (ch chillHandler) writeBody(rw http.ResponseWriter) {
+func (ch randomChillHandler) writeBody(rw http.ResponseWriter) {
 	numOptions := len(ch.phrases)
 	selectionIndex := ch.random(numOptions)
 	response := map[string]string{"chill": ch.phrases[selectionIndex]}

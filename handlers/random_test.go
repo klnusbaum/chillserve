@@ -6,14 +6,14 @@ import (
 	"net/http/httptest"
 )
 
-func TestNewChillHandler(t *testing.T) {
-	ch := NewChillHandler("phrase1", "phrase2").(chillHandler)
+func TestNewRandomChillHandler(t *testing.T) {
+	ch := NewRandomChillHandler("phrase1", "phrase2").(randomChillHandler)
 	assert.Len(t, ch.phrases, 2, "Phrases not of length 2")
 	assert.Equal(t, []string{"phrase1", "phrase2"}, ch.phrases, "Phrase list unequal")
 }
 
-func TestServeHttp(t *testing.T) {
-	ch := chillHandler{
+func TestServeRandomHttp(t *testing.T) {
+	ch := randomChillHandler{
 		phrases:[]string{"phrase1", "phrase2"},
 		random:func(n int) int { return 0 },
 	}

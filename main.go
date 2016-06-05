@@ -7,7 +7,7 @@ import (
 
 func main() {
 
-	ch := handlers.NewChillHandler("chill", "super chill", "chilly freeze")
+	ch := handlers.NewRandomChillHandler("chill", "super chill", "chilly freeze")
 
 	http.Handle("/chill", ch)
 	http.ListenAndServe(":8080", nil)
