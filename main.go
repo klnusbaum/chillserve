@@ -14,6 +14,7 @@ const DefaultConfigFile = ".chill/config.yaml"
 
 type Config struct {
 	Phrases []string
+	Replacements map[string]string
 }
 
 func main() {
@@ -22,7 +23,7 @@ func main() {
 		panic("Could not read config file")
 	}
 
-	ch := handlers.NewChillifierHandler()
+	ch := handlers.NewChillifierHandler(config.Replacements)
 	rch := handlers.NewRandomChillHandler(config.Phrases...)
 
 	http.Handle("/chillify", ch)

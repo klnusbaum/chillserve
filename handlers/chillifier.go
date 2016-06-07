@@ -14,24 +14,13 @@ type chillifier struct {
 	replacer chillReplacer
 }
 
-func NewChillifierHandler() http.Handler {
+func NewChillifierHandler(replacements map[string]string) http.Handler {
+	replacerArgs := make([]string, len(replacements) * 2)
+	for k, v := range replacements {
+		replacerArgs = append(replacerArgs, k, v)
+	}
 	return chillifier{
-		replacer: strings.NewReplacer(
-			" the ", " the chill ",
-			" The ", " The chill ",
-			"The ", "The chill ",
-			" a ", " a chill ",
-			" A ", " A chill ",
-			"A ", "A chill ",
-			" their ", " their chill ",
-			" Their ", " Their chill ",
-			" hate ", " love ",
-			" Hate ", " Love ",
-			"Hate ", "Love ",
-			" my ", " my chill ",
-			" My ", " My chill ",
-			"My ", "My chill",
-		),
+		replacer: strings.NewReplacer(replacerArgs...),
 	}
 }
 
