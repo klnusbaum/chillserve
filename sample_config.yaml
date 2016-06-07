@@ -1,0 +1,20 @@
+phrases:
+  - chill
+  - super chill
+  - chilly freeze
+  - most chill
+replacements:
+  " the " : " the chill "
+  " The " : " The chill "
+  "The " : "The chill "
+  " a " : " a chill "
+  " A " : " A chill "
+  "A " : "A chill "
+  " their " : " their chill "
+  " Their " : " Their chill "
+  " hate " : " love "
+  " Hate " : " Love "
+  "Hate " : "Love "
+  " my " : " my chill "
+  " My " : " My chill "
+  "My " : "My chill"
