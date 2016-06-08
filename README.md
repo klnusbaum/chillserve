@@ -1,6 +1,6 @@
 # Chill as a Service
 Chill as a Service (CaaS) aims to provide what the internet needs most: more chill. 
-Backed by the chilles of algorithms, CaaS provides a robust API for all of your chill 
+Backed by the chillest of algorithms, CaaS provides a robust API for all of your chill 
 needs.
 
 # API
