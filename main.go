@@ -13,8 +13,9 @@ import (
 const DefaultConfigFile = ".chill/config.yaml"
 
 type Config struct {
-	Phrases []string
-	Replacements map[string]string
+	Phrases             []string
+	Replacements        map[string]string
+	StateImagesLocation string
 }
 
 func main() {
@@ -25,9 +26,11 @@ func main() {
 
 	ch := handlers.NewChillifierHandler(config.Replacements)
 	rch := handlers.NewRandomChillHandler(config.Phrases...)
+	sc := handlers.NewStateChiller(config.StateImagesLocation)
 
 	http.Handle("/chillify", ch)
 	http.Handle("/chill", rch)
+	http.Handle("/states_chill", sc)
 	http.ListenAndServe(":8080", nil)
 }
 
