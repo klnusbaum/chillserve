@@ -7,12 +7,16 @@ import (
 )
 
 type stateChiller struct {
-	stateImagesLocation string
+	imageUrls map[string]string
 }
 
 func NewStateChiller(stateImagesLocation string) http.Handler {
+	imageUrls := make(map[string]string)
+	for state := range validStates {
+		imageUrls[state] = fmt.Sprintf("%s/%s.jpg", stateImagesLocation, state)
+	}
 	return stateChiller{
-		stateImagesLocation: stateImagesLocation,
+		imageUrls: imageUrls,
 	}
 }
 
@@ -51,7 +55,7 @@ func (sc stateChiller) writeInvalidStateResponse(rw http.ResponseWriter, missing
 
 func (sc stateChiller) writeChillResponse(rw http.ResponseWriter, state string) {
 	rw.WriteHeader(http.StatusOK)
-	response := map[string]string{"chill image": fmt.Sprintf("%s/%s.jpg", sc.stateImagesLocation, state)}
+	response := map[string]string{"chill image": sc.imageUrls[state]}
 	encoder := json.NewEncoder(rw)
 	encoder.Encode(response)
 }
