@@ -21,6 +21,7 @@ func TestServeRandomHttp(t *testing.T) {
 	w := httptest.NewRecorder()
 	rch.ServeHTTP(w, nil)
 
+	assert.Equal(t, w.Code, 200)
 	assert.Equal(t, "{\"chill\":\"phrase1\"}\n", w.Body.String(), "Incorrect response")
 	assert.Len(t,  w.HeaderMap["Content-Type"], 1, "Multiple content types")
 	assert.Equal(t, "text/json; charset=utf-8", w.HeaderMap["Content-Type"][0], "Incorrect content type")
