@@ -28,7 +28,7 @@ func (sc stateChillHandler) ServeHTTP(rw http.ResponseWriter, req *http.Request)
 func (sc stateChillHandler) processRequest(rw http.ResponseWriter, req *http.Request) {
 	state := req.FormValue("state")
 	if state == "" {
-		sc.writeErrorResponse(rw)
+		sc.writeBadRequestResponse(rw)
 		return
 	}
 
@@ -39,7 +39,7 @@ func (sc stateChillHandler) processRequest(rw http.ResponseWriter, req *http.Req
 	sc.writeChillResponse(rw, state)
 }
 
-func (sc stateChillHandler) writeErrorResponse(rw http.ResponseWriter) {
+func (sc stateChillHandler) writeBadRequestResponse(rw http.ResponseWriter) {
 	rw.WriteHeader(http.StatusBadRequest)
 	response := map[string]string{"error": "missing \"state\" parameter"}
 	encoder := json.NewEncoder(rw)
