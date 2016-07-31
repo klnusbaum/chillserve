@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-type chillifier struct {
+type chillifierHandler struct {
 	replacer *strings.Replacer
 }
 
@@ -15,17 +15,17 @@ func NewChillifierHandler(replacements map[string]string) http.Handler {
 	for k, v := range replacements {
 		replacerArgs = append(replacerArgs, k, v)
 	}
-	return chillifier{
+	return chillifierHandler{
 		replacer: strings.NewReplacer(replacerArgs...),
 	}
 }
 
-func (ch chillifier) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
+func (ch chillifierHandler) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	rw.Header().Set("Content-Type", "text/json; charset=utf-8")
 	ch.processRequest(rw, req)
 }
 
-func (ch chillifier) processRequest(rw http.ResponseWriter, req *http.Request) {
+func (ch chillifierHandler) processRequest(rw http.ResponseWriter, req *http.Request) {
 	text := req.FormValue("text")
 	if text == "" {
 		ch.writeErrorResponse(rw)
@@ -35,14 +35,14 @@ func (ch chillifier) processRequest(rw http.ResponseWriter, req *http.Request) {
 	ch.writeChillResponse(rw, text)
 }
 
-func (ch chillifier) writeErrorResponse(rw http.ResponseWriter) {
+func (ch chillifierHandler) writeErrorResponse(rw http.ResponseWriter) {
 	rw.WriteHeader(http.StatusBadRequest)
 	response := map[string]string{"error": "missing \"text\" parameter"}
 	encoder := json.NewEncoder(rw)
 	encoder.Encode(response)
 }
 
-func (ch chillifier) writeChillResponse(rw http.ResponseWriter, text string) {
+func (ch chillifierHandler) writeChillResponse(rw http.ResponseWriter, text string) {
 	rw.WriteHeader(http.StatusOK)
 
 	response := map[string]string{"chill text": ch.replacer.Replace(text)}
