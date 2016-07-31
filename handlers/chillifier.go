@@ -28,14 +28,14 @@ func (ch chillifierHandler) ServeHTTP(rw http.ResponseWriter, req *http.Request)
 func (ch chillifierHandler) processRequest(rw http.ResponseWriter, req *http.Request) {
 	text := req.FormValue("text")
 	if text == "" {
-		ch.writeErrorResponse(rw)
+		ch.writeBadRequestResponse(rw)
 		return
 	}
 
 	ch.writeChillResponse(rw, text)
 }
 
-func (ch chillifierHandler) writeErrorResponse(rw http.ResponseWriter) {
+func (ch chillifierHandler) writeBadRequestResponse(rw http.ResponseWriter) {
 	rw.WriteHeader(http.StatusBadRequest)
 	response := map[string]string{"error": "missing \"text\" parameter"}
 	encoder := json.NewEncoder(rw)
