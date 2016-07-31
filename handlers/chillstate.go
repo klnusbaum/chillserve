@@ -26,7 +26,7 @@ func (sc stateChillHandler) ServeHTTP(rw http.ResponseWriter, req *http.Request)
 }
 
 func (sc stateChillHandler) processRequest(rw http.ResponseWriter, req *http.Request) {
-	state := req.FormValue("state")
+	state := strings.ToUpper(req.FormValue("state"))
 	if state == "" {
 		sc.writeBadRequestResponse(rw)
 		return
