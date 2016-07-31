@@ -39,13 +39,11 @@ func (sc stateChillHandler) processRequest(rw http.ResponseWriter, req *http.Req
 	if state == "" {
 		sc.writeBadRequestResponse(rw)
 		return
-	}
-
-	if !validStates[state] {
+	} else if !validStates[state] {
 		sc.writeInvalidStateResponse(rw, state)
+	} else {
+		sc.writeChillResponse(rw, state)
 	}
-
-	sc.writeChillResponse(rw, state)
 }
 
 func (sc stateChillHandler) writeBadRequestResponse(rw http.ResponseWriter) {
