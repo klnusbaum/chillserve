@@ -9,8 +9,9 @@ import (
 )
 
 func TestNewChillifierHandler(t *testing.T) {
-	testMap := make(map[string]string)
-	testMap["bad"] = "good"
+	testMap := map[string]string {
+		"bad": "good",
+	}
 	ch := NewChillifierHandler(testMap).(chillifierHandler)
 	assert.Equal(t, "good", ch.replacer.Replace("bad"), "Good not replaced with bad")
 	assert.Equal(t, "Cheese", ch.replacer.Replace("Cheese"), "Cheese was placed when it should not have been.")
