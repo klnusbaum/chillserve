@@ -12,6 +12,11 @@ ever the occasion, some times you just need to chill. CaaS has you
 covered. Just simply hit the the `/chill` endpoint and you will get 
 back a JSON response with a chill phrase to help bring you serenity.
 
+Example request:
+```
+http://chill.io/chill
+```
+
 Example Response:
 ```json
 { "chill": "super chill" }
@@ -25,11 +30,28 @@ Simply provide it with the unchill text, and `/chillify` will send you back
 a much more chill version of the text.
 
 Example Request:
-```json
-{ "text": "I hate talking with my kombucha supplier." }
+```
+http://chill.io/chillify?text=I%20hate%20talking%20with%20my%20kombucha%20supplier.
 ```
 
-Example Resposne:
+Example Response:
 ```json
-{ "chill text": "I love talking with my chill kombucha supplier." }
+{ "chill_text": "I love talking with my chill kombucha supplier." }
+```
+
+## /states_chill
+Where ever you are, sometimes you just need a chill image. In this respect,
+the `/states_chill` endpoint has your back. Just provide the state you would
+like to see a chill image over, and `/states_chill` will send you back a chill
+image url. The image will resonate with the chillest vibes of the provided
+state.
+
+Example Request:
+```
+http://chill.io/states_chill?state=MN
+```
+
+Example Response:
+```json
+{ "chill_image": "http://mycdn.chill.io/MN.jpg" }
 ```
