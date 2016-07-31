@@ -18,7 +18,7 @@ type stateChillHandler struct {
 // http://localhost:8008/states_chill?state=MN
 //
 // Example response:
-//   {"chill image":"http://blahblahblh.cloudfront.net/CA.jpg"}
+//   {"chill_image":"http://blahblahblh.cloudfront.net/CA.jpg"}
 func NewStateChillHandler(stateImagesLocation string) http.Handler {
 	imageUrls := make(map[string]string)
 	for state := range validStates {
@@ -64,7 +64,7 @@ func (sc stateChillHandler) writeInvalidStateResponse(rw http.ResponseWriter, mi
 
 func (sc stateChillHandler) writeChillResponse(rw http.ResponseWriter, state string) {
 	rw.WriteHeader(http.StatusOK)
-	response := map[string]string{"chill image": sc.imageUrls[state]}
+	response := map[string]string{"chill_image": sc.imageUrls[state]}
 	encoder := json.NewEncoder(rw)
 	encoder.Encode(response)
 }
