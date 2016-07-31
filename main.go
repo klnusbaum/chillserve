@@ -26,7 +26,7 @@ func main() {
 
 	ch := handlers.NewChillifierHandler(config.Replacements)
 	rch := handlers.NewRandomChillHandler(config.Phrases...)
-	sc := handlers.NewStateChiller(config.StateImagesLocation)
+	sc := handlers.NewStateChillHandler(config.StateImagesLocation)
 
 	http.Handle("/chillify", ch)
 	http.Handle("/chill", rch)
