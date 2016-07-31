@@ -4,12 +4,21 @@ import (
 	"net/http"
 	"encoding/json"
 	"fmt"
+	"strings"
 )
 
 type stateChillHandler struct {
 	imageUrls map[string]string
 }
 
+// NewStateChillHandler creates an http handler that will return chill images of states. The state image returned is
+// determined by "state" parameter provided in the request.
+//
+// Example request:
+// http://localhost:8008/states_chill?state=MN
+//
+// Example response:
+//   {"chill image":"http://blahblahblh.cloudfront.net/CA.jpg"}
 func NewStateChillHandler(stateImagesLocation string) http.Handler {
 	imageUrls := make(map[string]string)
 	for state := range validStates {

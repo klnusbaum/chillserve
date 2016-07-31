@@ -10,6 +10,14 @@ type chillifierHandler struct {
 	replacer *strings.Replacer
 }
 
+// NewChillifierHandler creates an http handler that, given a piece of text, will return a chiller verson of that
+// text. Text is passed in via the text parameter.
+//
+// Example request:
+// http://localhost:8080/chillify?text=I%20hate%20my%20broom
+//
+// Example response:
+//   {"chill text":"I love my broom"}
 func NewChillifierHandler(replacements map[string]string) http.Handler {
 	replacerArgs := make([]string, len(replacements) * 2)
 	for k, v := range replacements {
