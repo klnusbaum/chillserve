@@ -6,12 +6,8 @@ import (
 	"strings"
 )
 
-type chillReplacer interface {
-	Replace(s string) string
-}
-
 type chillifier struct {
-	replacer chillReplacer
+	replacer *strings.Replacer
 }
 
 func NewChillifierHandler(replacements map[string]string) http.Handler {

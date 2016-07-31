@@ -6,7 +6,6 @@ import (
 	"net/http"
 )
 
-// A function that generates a random number between 0 and a given number
 type randomer func(int) int
 
 type randomChillHandler struct {
