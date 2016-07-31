@@ -28,7 +28,7 @@ func TestServeChillifierHttp(t *testing.T) {
 	ch.ServeHTTP(w, req)
 
 	assert.Equal(t, w.Code, 200)
-	assert.Equal(t, "{\"chill text\":\"good\"}\n", w.Body.String(), "Incorrect response")
+	assert.Equal(t, "{\"chill_text\":\"good\"}\n", w.Body.String(), "Incorrect response")
 	assert.Len(t,  w.HeaderMap["Content-Type"], 1, "Multiple content types")
 	assert.Equal(t, "text/json; charset=utf-8", w.HeaderMap["Content-Type"][0], "Incorrect content type")
 }

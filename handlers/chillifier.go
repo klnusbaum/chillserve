@@ -53,7 +53,7 @@ func (ch chillifierHandler) writeBadRequestResponse(rw http.ResponseWriter) {
 func (ch chillifierHandler) writeChillResponse(rw http.ResponseWriter, text string) {
 	rw.WriteHeader(http.StatusOK)
 
-	response := map[string]string{"chill text": ch.replacer.Replace(text)}
+	response := map[string]string{"chill_text": ch.replacer.Replace(text)}
 	encoder := json.NewEncoder(rw)
 	encoder.Encode(response)
 }
