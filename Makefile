@@ -1,4 +1,7 @@
-test: testhandlers
+test: testHandlers testConfig
 
-testhandlers:
+testHandlers:
 	go test ./handlers/... -coverprofile=coverage.out
+
+testConfig:
+	go test ./config/... -coverprofile=coverage.out

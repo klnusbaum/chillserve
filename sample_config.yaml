@@ -18,4 +18,4 @@ replacements:
   " my " : " my chill "
   " My " : " My chill "
   "My " : "My chill"
-stateimageslocation: "http://my.imagestore.com"
+stateimageslocation: http://my.imagestore.com

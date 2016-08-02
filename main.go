@@ -1,29 +1,33 @@
 package main
 
 import (
-	"github.com/klnusbaum/chillserve/handlers"
 	"net/http"
 
-	"github.com/go-yaml/yaml"
+	"github.com/klnusbaum/chillserve/config"
+	"github.com/klnusbaum/chillserve/handlers"
 	"io/ioutil"
 	"os/user"
-	"path/filepath"
+	"flag"
 )
 
-const DefaultConfigFile = ".chill/config.yaml"
-
-type Config struct {
-	Phrases             []string
-	Replacements        map[string]string
-	StateImagesLocation string
-}
-
 func main() {
-	config, err := getConfig()
+	parsedArgs := parseArgs()
+	config, err := config.GetConfig(parsedArgs, user.Current, ioutil.ReadFile)
 	if err != nil {
 		panic("Could not read config file")
 	}
+	setupHandlers(config)
+	http.ListenAndServe(":8080", nil)
+}
 
+func parseArgs() config.ParsedArgs {
+	parsedArgs := config.ParsedArgs{}
+	flag.StringVar(&parsedArgs.ConfigFile, "config", "", "File containing configuration for chillserve")
+	flag.Parse()
+	return parsedArgs
+}
+
+func setupHandlers(config *config.Config) {
 	ch := handlers.NewChillifierHandler(config.Replacements)
 	rch := handlers.NewRandomChillHandler(config.Phrases...)
 	sc := handlers.NewStateChillHandler(config.StateImagesLocation)
@@ -31,23 +35,4 @@ func main() {
 	http.Handle("/chillify", ch)
 	http.Handle("/chill", rch)
 	http.Handle("/states_chill", sc)
-	http.ListenAndServe(":8080", nil)
-}
-
-func getConfig() (Config, error) {
-	usr, err := user.Current()
-	if err != nil {
-		return Config{}, err
-	}
-
-	configFile := filepath.Join(usr.HomeDir, DefaultConfigFile)
-	fileContents, err := ioutil.ReadFile(configFile)
-
-	if err != nil {
-		return Config{}, err
-	}
-
-	config := Config{}
-	err = yaml.Unmarshal(fileContents, &config)
-	return config, err
 }
