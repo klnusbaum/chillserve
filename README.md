@@ -55,3 +55,10 @@ Example Response:
 ```json
 { "chill_image": "http://mycdn.chill.io/MN.jpg" }
 ```
+
+# License
+ChillServe is licensed under the [Apache V2 license](http://www.apache.org/licenses/LICENSE-2.0).
+
+# Who are you?
+I'm [Kurtis Nusbaum](http://github.com/klnusbaum). Sometimes I write [blog posts](https://medium.com/@kurtisnusbaum)
+about coding.
