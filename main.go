@@ -16,7 +16,7 @@ func main() {
 	if err != nil {
 		panic("Could not read config file")
 	}
-	setupHandlers(config)
+	setupChillHandlers(config)
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -27,7 +27,7 @@ func parseArgs() config.ParsedArgs {
 	return parsedArgs
 }
 
-func setupHandlers(config *config.Config) {
+func setupChillHandlers(config *config.Config) {
 	ch := handlers.NewChillifierHandler(config.Replacements)
 	rch := handlers.NewRandomChillHandler(config.Phrases...)
 	sc := handlers.NewStateChillHandler(config.StateImagesLocation)
