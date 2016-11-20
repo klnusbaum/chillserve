@@ -8,6 +8,7 @@ var validStates = map[string]bool{
 	"CA" : true,
 	"CO" : true,
 	"CT" : true,
+  "DC" : true,
 	"DE" : true,
 	"FL" : true,
 	"GA" : true,
