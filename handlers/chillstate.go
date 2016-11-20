@@ -22,7 +22,7 @@ type stateChillHandler struct {
 func NewStateChillHandler(stateImagesLocation string) http.Handler {
 	imageUrls := make(map[string]string)
 	for state := range validStates {
-		imageUrls[state] = fmt.Sprintf("%s/%s.jpg", stateImagesLocation, state)
+		imageUrls[state] = fmt.Sprintf("%s/%s.png", stateImagesLocation, state)
 	}
 	return stateChillHandler{
 		imageUrls: imageUrls,
