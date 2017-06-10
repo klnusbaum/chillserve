@@ -18,7 +18,7 @@ type stateChillHandler struct {
 // http://localhost:8008/states_chill?state=MN
 //
 // Example response:
-//   {"chill_image":"http://blahblahblh.cloudfront.net/CA.jpg"}
+//   {"chill_image":"http://blahblahblh.cloudfront.net/MN.png"}
 func NewStateChillHandler(stateImagesLocation string) http.Handler {
 	imageUrls := make(map[string]string)
 	for state := range validStates {
